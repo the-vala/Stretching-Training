@@ -190,3 +190,5 @@ git_stats/*
 StyleCop.Cache
 bin
 obj
+/.vs/Ejemplo_PlantillaSkeleton/v15/Server/sqlite3/db.lock
+/.vs/Ejemplo_PlantillaSkeleton/v15/Server/sqlite3

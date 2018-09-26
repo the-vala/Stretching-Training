@@ -65,3 +65,21 @@ C:\Users\Vala\Desktop\Ejemplo_PlantillaSkeleton\Ejemplo_PlantillaSkeleton\obj\De
 D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.exe.config
 D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.exe
 D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.pdb
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.exe.config
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.exe
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.pdb
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Microsoft.Kinect.dll
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Microsoft.Kinect.xml
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csprojAssemblyReference.cache
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\MainWindow.g.cs
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\App.g.cs
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton_MarkupCompile.cache
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton_MarkupCompile.lref
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\MainWindow.baml
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.g.resources
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.Properties.Resources.resources
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csproj.GenerateResource.cache
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csproj.CoreCompileInputs.cache
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csproj.CopyComplete
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.exe
+C:\Users\cicc1\Documents\Visual Studio 2017\Projects\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.pdb
