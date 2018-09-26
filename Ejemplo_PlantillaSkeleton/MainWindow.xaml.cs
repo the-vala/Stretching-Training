@@ -42,6 +42,7 @@ namespace Ejemplo_PlantillaSkeleton
         public MainWindow()
         {
             InitializeComponent();
+            ChangeExcersise();
             //Calcular	el	radio	de	cada	uno	de	los	círculos
             dRadioC1 = CirculoOutRH.Width / 2;
             dRadioC2 = CirculoInRH.Width / 2;
@@ -225,8 +226,10 @@ namespace Ejemplo_PlantillaSkeleton
             if (iCont == 0)
             {
                 Ejercicio++;
+                ChangeExcersise();
                 ejercicio.Content = "Ejercicio# " + Ejercicio;
                 iCont = 8;
+                progressbar.Value = 0;
                 return;
             }
             progressbar.Maximum = 8;
@@ -246,8 +249,36 @@ namespace Ejemplo_PlantillaSkeleton
             return new Point(depthPoint.X, depthPoint.Y);
         }
         
+        private void ChangeExcersise()
+        {
+            switch (Ejercicio)
+            {
+                case 1:
+                    CirculoInRH.Visibility = Visibility.Visible;
+                    CirculoInLH.Visibility = Visibility.Visible;
+                    CirculoOutRH.Visibility = Visibility.Visible;
+                    CirculoOutLH.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    CirculoInRH.Visibility = Visibility.Hidden;
+                    CirculoInLH.Visibility = Visibility.Hidden;
+                    CirculoOutRH.Visibility = Visibility.Hidden;
+                    CirculoOutLH.Visibility = Visibility.Hidden;
+                    VerticalL.Visibility = Visibility.Visible;
+                    HorizontalL.Visibility = Visibility.Visible;
+                    VerticalR.Visibility = Visibility.Visible;
+                    HorizontalR.Visibility = Visibility.Visible;
+                    GoalLH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalLH.SetValue(Canvas.LeftProperty, 210.0);
+                    GoalRH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalRH.SetValue(Canvas.LeftProperty, 376.0);
+                    break;
+            }
+        }
+
         double anguloRH = 360;
         double anguloLH = 0;
+        int alturaL = 0;
         private void MoveHandGoal(object sender, EventArgs e)
         {
             switch(Ejercicio)
@@ -259,10 +290,13 @@ namespace Ejemplo_PlantillaSkeleton
                     GoalLH.RenderTransform = new RotateTransform(anguloLH);
                     break;
                 case 2:
-                    CirculoInRH.Visibility = Visibility.Hidden;
-                    CirculoInLH.Visibility = Visibility.Hidden;
-                    CirculoOutRH.Visibility = Visibility.Hidden;
-                    CirculoOutLH.Visibility = Visibility.Hidden;
+                    if (alturaL < 210)
+                    {
+                        alturaL += 5;
+                        GoalLH.SetValue(Canvas.TopProperty, 210.0 + alturaL);
+                    }
+                    
+
                     break;
             }
             
