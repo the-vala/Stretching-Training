@@ -37,11 +37,14 @@ namespace Ejemplo_PlantillaSkeleton
         DispatcherTimer progressTimer;
         int iCont = 8;
         int Ejercicio = 1;
+        private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
+        private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
         {
             InitializeComponent();
+            ChangeExcersise();
             //Calcular	el	radio	de	cada	uno	de	los	círculos
             dRadioC1 = CirculoOutRH.Width / 2;
             dRadioC2 = CirculoInRH.Width / 2;
@@ -61,6 +64,15 @@ namespace Ejemplo_PlantillaSkeleton
             Kinect_Config();
         }
         /* -- Área para el método que utiliza los datos proporcionados por Kinect -- */
+        /// <summary>
+        /// Método que realiza las manipulaciones necesarias sobre el arreglo de bytes que contiene la
+        /// información de los pixeles
+        /// </summary>
+        private void usarCamara()
+        {
+            // Escribir los datos en el Bitmap
+            this.imagen.WritePixels(new Int32Rect(0, 0, this.imagen.PixelWidth, this.imagen.PixelHeight), this.cantidadPixeles, this.imagen.PixelWidth * sizeof(int), 0);
+        }
         /// <summary>
         /// Método que realiza las manipulaciones necesarias sobre el Skeleton trazado
         /// </summary>
@@ -225,8 +237,10 @@ namespace Ejemplo_PlantillaSkeleton
             if (iCont == 0)
             {
                 Ejercicio++;
+                ChangeExcersise();
                 ejercicio.Content = "Ejercicio# " + Ejercicio;
                 iCont = 8;
+                progressbar.Value = 0;
                 return;
             }
             progressbar.Maximum = 8;
@@ -246,8 +260,36 @@ namespace Ejemplo_PlantillaSkeleton
             return new Point(depthPoint.X, depthPoint.Y);
         }
         
+        private void ChangeExcersise()
+        {
+            switch (Ejercicio)
+            {
+                case 1:
+                    CirculoInRH.Visibility = Visibility.Visible;
+                    CirculoInLH.Visibility = Visibility.Visible;
+                    CirculoOutRH.Visibility = Visibility.Visible;
+                    CirculoOutLH.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    CirculoInRH.Visibility = Visibility.Hidden;
+                    CirculoInLH.Visibility = Visibility.Hidden;
+                    CirculoOutRH.Visibility = Visibility.Hidden;
+                    CirculoOutLH.Visibility = Visibility.Hidden;
+                    VerticalL.Visibility = Visibility.Visible;
+                    HorizontalL.Visibility = Visibility.Visible;
+                    VerticalR.Visibility = Visibility.Visible;
+                    HorizontalR.Visibility = Visibility.Visible;
+                    GoalLH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalLH.SetValue(Canvas.LeftProperty, 210.0);
+                    GoalRH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalRH.SetValue(Canvas.LeftProperty, 376.0);
+                    break;
+            }
+        }
+
         double anguloRH = 360;
         double anguloLH = 0;
+        int alturaL = 0;
         private void MoveHandGoal(object sender, EventArgs e)
         {
             switch(Ejercicio)
@@ -259,10 +301,13 @@ namespace Ejemplo_PlantillaSkeleton
                     GoalLH.RenderTransform = new RotateTransform(anguloLH);
                     break;
                 case 2:
-                    CirculoInRH.Visibility = Visibility.Hidden;
-                    CirculoInLH.Visibility = Visibility.Hidden;
-                    CirculoOutRH.Visibility = Visibility.Hidden;
-                    CirculoOutLH.Visibility = Visibility.Hidden;
+                    if (alturaL < 210)
+                    {
+                        alturaL += 5;
+                        GoalLH.SetValue(Canvas.TopProperty, 210.0 + alturaL);
+                    }
+                    
+
                     break;
             }
             
@@ -288,6 +333,20 @@ namespace Ejemplo_PlantillaSkeleton
 
                 // Enlistar al evento que se ejecuta cada vez que el Kinect tiene datos listos
                 this.miKinect.SkeletonFrameReady += this.Kinect_FrameReady;
+                // Habilitar ColorStream con una resolución de 640x480 a una razón de 30 frames / seg
+                this.miKinect.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
+
+                // Enlistar la función que se llamará cada vez que el Kinect tiene listo un frame de datos
+                this.miKinect.ColorFrameReady += this.Kinect_FrameReady;
+
+                // Crear el arreglo que recibe los datos de los pixeles, FramePixelDataLength es el número de bytes en el frame
+                this.cantidadPixeles = new byte[this.miKinect.ColorStream.FramePixelDataLength];
+
+                // Crear el WriteableBitmap que tendrá la imagen
+                this.imagen = new WriteableBitmap(this.miKinect.ColorStream.FrameWidth, this.miKinect.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
+
+                // Asignar la imagen como fuente para ser mostrada en la ventana
+                this.Image.Source = this.imagen;
                 /* ---------------------------------------------------------------- */
 
                 // Enlistar el método que se llama cada vez que hay un cambio en el estado del Kinect
@@ -308,6 +367,24 @@ namespace Ejemplo_PlantillaSkeleton
             {
                 // Enlistar el método que se llama cada vez que hay un cambio en el estado del Kinect
                 KinectSensor.KinectSensors.StatusChanged += Kinect_StatusChanged;
+            }
+        }
+        /// <summary>
+        /// Método que adquiere los datos que envia el Kinect, su contenido varía según la tecnología 
+        /// que se esté utilizando (Cámara, SkeletonTraking, DepthSensor, etc)
+        /// </summary>
+        private void Kinect_FrameReady(object sender, ColorImageFrameReadyEventArgs e)
+        {
+            using (ColorImageFrame colorFrame = e.OpenColorImageFrame())
+            {
+                if (colorFrame != null)
+                {
+                    // Copiar los datos(referentes a los pixeles) del frame a un arreglo
+                    colorFrame.CopyPixelDataTo(this.cantidadPixeles);
+
+                    // Manipular los bytes en el arreglo
+                    usarCamara();
+                }
             }
         }
         /// <summary>
