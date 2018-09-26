@@ -10,10 +10,8 @@
         <Canvas	Name="MainCanvas" Width="640" Height="480" Background="Azure" HorizontalAlignment="Center" Margin="61,112">
             <Ellipse x:Name="CirculoOutRH" Width="150" Height="150"	Canvas.Left="360" Canvas.Top="216" Fill="Red"/>
             <Ellipse x:Name="CirculoInRH" Width="50" Height="50"	Canvas.Left="412" Canvas.Top="267" Fill="Azure"/>
-            <Ellipse x:Name="GoalRH" Width="30" Height="30" Canvas.Left="421" Canvas.Top="338" Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
             <Ellipse x:Name="CirculoOutLH" Width="150" Height="150"	Canvas.Left="137" Canvas.Top="216" Fill="Red"/>
             <Ellipse x:Name="CirculoInLH" Width="50" Height="50" Canvas.Left="186" Canvas.Top="267" Fill="Azure"/>
-            <Ellipse x:Name="GoalLH" Width="30" Height="30" Canvas.Left="197" Canvas.Top="336"	Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
             <Ellipse x:Name="pointerHead" Width="30" Height="30" Canvas.Left="300" Canvas.Top="10"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerRHand" Width="30" Height="30" Canvas.Left="508" Canvas.Top="392"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerLHand" Width="30" Height="30" Canvas.Left="97" Canvas.Top="392"	Fill="#FFFF00E5"/>
@@ -25,12 +23,13 @@
             <Ellipse x:Name="pointerSpine" Width="30" Height="30" Canvas.Left="300" Canvas.Top="395"	Fill="#FFFF00E5"/>
             <Label x:Name="tiempo" Content="Tiempo: 8" Canvas.Left="473" Canvas.Top="422" Width="97" FontWeight="Bold" FontSize="15"/>
             <Label x:Name="ejercicio" Content="Ejercicio# 1" Canvas.Left="10" Canvas.Top="10" Width="97" FontWeight="Bold" FontSize="15"/>
+            <Image x:Name="GoalLH" Height="30" Canvas.Left="197" Canvas.Top="336" Source="fist_hand.png"  Width="30" RenderTransformOrigin="0.5,-1.55"/>
+            <Image x:Name="GoalRH"  Height="30" Canvas.Left="421" Canvas.Top="338" Source="fist_hand.png" Width="30" RenderTransformOrigin="0.5,-1.55"/>
         </Canvas>
         <Label x:Name="L1" Content="Estatus:" FontSize="15"	FontWeight="Bold" Background="Bisque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="61,628,0,0"/>
         <Label x:Name="LEstatus" Content="Desconectado"	FontSize="15" Foreground="#FFDA2828" HorizontalAlignment="Left"	VerticalAlignment="Top" Margin="141,628,0,0"/>
         <Label x:Name="L3" Content="ID:" FontSize="15" FontWeight="Bold" Background="Bisque" HorizontalAlignment="Left"	VerticalAlignment="Top" Margin="305,628,0,0"/>
         <Label x:Name="LID"	Content="0"	FontSize="15" Foreground="#FFDA2828" HorizontalAlignment="Left"	VerticalAlignment="Top"	Margin="344,628,0,0"/>
         <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="26" Margin="524,566,0,0" VerticalAlignment="Top" Width="177"/>
-
     </Grid>
 </Window>
