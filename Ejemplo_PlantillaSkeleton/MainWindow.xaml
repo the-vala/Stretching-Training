@@ -11,6 +11,15 @@
             <Ellipse x:Name="Circulo1" Width="300" Height="300"	Canvas.Left="170" Canvas.Top="90" Fill="Black"/>
             <Ellipse x:Name="Circulo2" Width="200" Height="200"	Canvas.Left="220" Canvas.Top="140" Fill="Azure"/>
             <Ellipse x:Name="Puntero" Width="30" Height="30" Canvas.Left="576" Canvas.Top="355"	Fill="Red"/>
+            <Ellipse x:Name="pointerHead" Width="30" Height="30" Canvas.Left="300" Canvas.Top="10"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerRHand" Width="30" Height="30" Canvas.Left="508" Canvas.Top="392"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerLHand" Width="30" Height="30" Canvas.Left="97" Canvas.Top="392"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerRElbow" Width="30" Height="30" Canvas.Left="508" Canvas.Top="245"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerLElbow" Width="30" Height="30" Canvas.Left="97" Canvas.Top="245"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerRShoulder" Width="30" Height="30" Canvas.Left="440" Canvas.Top="90"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerLShoulder" Width="30" Height="30" Canvas.Left="170" Canvas.Top="90"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerCShoulder" Width="30" Height="30" Canvas.Left="300" Canvas.Top="60"	Fill="#FFFF00E5"/>
+            <Ellipse x:Name="pointerSpine" Width="30" Height="30" Canvas.Left="300" Canvas.Top="395"	Fill="#FFFF00E5"/>
         </Canvas>
         <Label x:Name="L1" Content="Estatus:" FontSize="15"	FontWeight="Bold" Background="Bisque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="61,628,0,0"/>
         <Label x:Name="LEstatus" Content="Desconectado"	FontSize="15" Foreground="#FFDA2828" HorizontalAlignment="Left"	VerticalAlignment="Top" Margin="141,628,0,0"/>

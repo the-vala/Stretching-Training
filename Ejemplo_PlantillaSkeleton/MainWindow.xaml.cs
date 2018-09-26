@@ -33,6 +33,8 @@ namespace Ejemplo_PlantillaSkeleton
         /* ----------------------- Área para las variables ------------------------- */
         double dMano_X;            //Representa la coordenada X de la mano derecha
         double dMano_Y;            //Representa la coordenada Y de la mano derecha
+        double joint_X;            //Representa la coordenada X del joint
+        double joint_Y;            //Representa la coordenada Y del joint
         Point joint_Point = new Point(); //Permite obtener los datos del Joint
         double dXC, dYC;
         //Variables	que	almacenan	el	radio	de	cada	uno	de	los	círculos.
@@ -63,6 +65,132 @@ namespace Ejemplo_PlantillaSkeleton
         private void usarSkeleton(Skeleton skeleton)
         {       //Extrae	la	información	del	Joint	de	la	mano	derecha
             Joint joint1 = skeleton.Joints[JointType.HandRight];
+            Joint rHand = skeleton.Joints[JointType.HandRight];
+            Joint lHand = skeleton.Joints[JointType.HandLeft];
+            Joint rElbow = skeleton.Joints[JointType.ElbowRight];
+            Joint lElbow = skeleton.Joints[JointType.ElbowLeft];
+            Joint rShoulder = skeleton.Joints[JointType.ShoulderRight];
+            Joint lShoulder = skeleton.Joints[JointType.ShoulderLeft];
+            Joint cShoulder = skeleton.Joints[JointType.ShoulderCenter];
+            Joint head = skeleton.Joints[JointType.Head];
+            Joint spine = skeleton.Joints[JointType.Spine];
+            //	Si	head está	listo	obtener	las	coordenadas
+            if (head.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(head.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerHead.SetValue(Canvas.TopProperty, joint_Y);
+                pointerHead.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	rHand está	listo	obtener	las	coordenadas
+            if (rHand.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(rHand.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerRHand.SetValue(Canvas.TopProperty, joint_Y);
+                pointerRHand.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	lHand está	listo	obtener	las	coordenadas
+            if (lHand.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(lHand.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerLHand.SetValue(Canvas.TopProperty, joint_Y);
+                pointerLHand.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	rShoulder está	listo	obtener	las	coordenadas
+            if (rShoulder.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(rShoulder.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerRShoulder.SetValue(Canvas.TopProperty, joint_Y);
+                pointerRShoulder.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	lShoulder está	listo	obtener	las	coordenadas
+            if (lShoulder.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(lShoulder.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerLShoulder.SetValue(Canvas.TopProperty, joint_Y);
+                pointerLShoulder.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	cShoulder está	listo	obtener	las	coordenadas
+            if (cShoulder.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(cShoulder.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerCShoulder.SetValue(Canvas.TopProperty, joint_Y);
+                pointerCShoulder.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	rElbow está	listo	obtener	las	coordenadas
+            if (rElbow.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(rElbow.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerRElbow.SetValue(Canvas.TopProperty, joint_Y);
+                pointerRElbow.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	lElbow está	listo	obtener	las	coordenadas
+            if (lElbow.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(lElbow.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerLElbow.SetValue(Canvas.TopProperty, joint_Y);
+                pointerLElbow.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
+            //	Si	spine está	listo	obtener	las	coordenadas
+            if (spine.TrackingState == JointTrackingState.Tracked)
+            {
+                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
+                joint_Point = this.SkeletonPointToScreen(spine.Position);
+                joint_X = joint_Point.X;
+                joint_Y = joint_Point.Y;
+                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
+                pointerSpine.SetValue(Canvas.TopProperty, joint_Y);
+                pointerSpine.SetValue(Canvas.LeftProperty, joint_X);
+                //	Obtiene	el	Id	de	la	persona	mapeada
+                LID.Content = skeleton.TrackingId;
+            }
             //	Si	el	Joint	está	listo	obtener	las	coordenadas
             if (joint1.TrackingState == JointTrackingState.Tracked)
             {
