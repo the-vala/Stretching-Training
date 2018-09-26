@@ -8,9 +8,14 @@
         Title="MainWindow" Height="735" Width="770" Closing="Window_Closing">
     <Grid>
         <Canvas	Name="MainCanvas" Width="640" Height="480" Grid.Row="1" Background="Azure" HorizontalAlignment="Center">
-            <Ellipse x:Name="Circulo1" Width="300" Height="300"	Canvas.Left="170" Canvas.Top="90" Fill="Black"/>
-            <Ellipse x:Name="Circulo2" Width="200" Height="200"	Canvas.Left="220" Canvas.Top="140" Fill="Azure"/>
-            <Ellipse x:Name="Puntero" Width="30" Height="30" Canvas.Left="576" Canvas.Top="355"	Fill="Red"/>
+
+            <Ellipse x:Name="CirculoOutRH" Width="150" Height="150"	Canvas.Left="420" Canvas.Top="132" Fill="Red"/>
+            <Ellipse x:Name="CirculoInRH" Width="100" Height="100"	Canvas.Left="444" Canvas.Top="158" Fill="Azure"/>
+            <Ellipse x:Name="GoalRH" Width="30" Height="30" Canvas.Left="481" Canvas.Top="254" Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
+            <Ellipse x:Name="Puntero" Width="30" Height="30" Canvas.Left="540" Canvas.Top="371"	Fill="Orange"/>
+            <Ellipse x:Name="CirculoOutLH" Width="150" Height="150"	Canvas.Left="77" Canvas.Top="132" Fill="Red"/>
+            <Ellipse x:Name="CirculoInLH" Width="100" Height="100"	Canvas.Left="101" Canvas.Top="158" Fill="Azure"/>
+            <Ellipse x:Name="GoalLH" Width="30" Height="30" Canvas.Left="137" Canvas.Top="254"	Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
         </Canvas>
         <Label x:Name="L1" Content="Estatus:" FontSize="15"	FontWeight="Bold" Background="Bisque" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="61,628,0,0"/>
         <Label x:Name="LEstatus" Content="Desconectado"	FontSize="15" Foreground="#FFDA2828" HorizontalAlignment="Left"	VerticalAlignment="Top" Margin="141,628,0,0"/>

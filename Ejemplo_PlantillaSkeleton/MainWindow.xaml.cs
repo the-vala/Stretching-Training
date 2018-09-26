@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 /* -- Bibliotecas añadidas --*/
 using Microsoft.Kinect;
 using System.IO;
+using System.Windows.Threading;
 /*---------------------------*/
 
 namespace Ejemplo_PlantillaSkeleton
@@ -37,6 +38,9 @@ namespace Ejemplo_PlantillaSkeleton
         double dXC, dYC;
         //Variables	que	almacenan	el	radio	de	cada	uno	de	los	círculos.
         double dRadioC1, dRadioC2;
+        DispatcherTimer goalHTimer;
+        double verticalPath = 0;
+        double horizontalPath = 0;
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
@@ -44,12 +48,17 @@ namespace Ejemplo_PlantillaSkeleton
             InitializeComponent();
 
             //Calcula	la	coordenada	del	centro	del	aro
-            dXC = (double)Circulo2.GetValue(Canvas.LeftProperty) + (Circulo2.Width / 2);
-            dYC = (double)Circulo2.GetValue(Canvas.TopProperty) + (Circulo2.Height / 2);
+            dXC = (double)CirculoInRH.GetValue(Canvas.LeftProperty) + (CirculoInRH.Width / 2);
+            dYC = (double)CirculoInRH.GetValue(Canvas.TopProperty) + (CirculoInRH.Height / 2);
 
             //Calcular	el	radio	de	cada	uno	de	los	círculos
-            dRadioC1 = Circulo1.Width / 2;
-            dRadioC2 = Circulo2.Width / 2;
+            dRadioC1 = CirculoOutRH.Width / 2;
+            dRadioC2 = CirculoInRH.Width / 2;
+
+            goalHTimer = new DispatcherTimer();
+            goalHTimer.Interval = new TimeSpan(0, 0, 0, 0, 40);
+            goalHTimer.Tick += new EventHandler(MoveHandGoal);
+            goalHTimer.IsEnabled = true;
 
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
@@ -78,11 +87,11 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Verificar	si	el	círculo	rojo	se	encuentra	dentro	de	la	trayectoria
                 if (checarDistancia())
                 {
-                    Circulo1.Fill = Brushes.Yellow; //No	se	encuentra
+                    CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
                 }
                 else
                 {
-                    Circulo1.Fill = Brushes.Black;      //Sí	se	encuentra
+                    CirculoOutRH.Fill = Brushes.Green;      //Sí	se	encuentra
                 }
             }
         }
@@ -99,6 +108,16 @@ namespace Ejemplo_PlantillaSkeleton
             // Convertertir un punto a "Depth Space" en una resolución de 640x480
             DepthImagePoint depthPoint = this.miKinect.CoordinateMapper.MapSkeletonPointToDepthPoint(skelpoint, DepthImageFormat.Resolution640x480Fps30);
             return new Point(depthPoint.X, depthPoint.Y);
+        }
+        
+        double anguloRH = 360;
+        double anguloLH = 0;
+        private void MoveHandGoal(object sender, EventArgs e)
+        {
+            anguloRH -= 10;
+            GoalRH.RenderTransform = new RotateTransform(anguloRH);
+            anguloLH += 10;
+            GoalLH.RenderTransform = new RotateTransform(anguloLH);
         }
         /* ------------------------------------------------------------------------- */
 
