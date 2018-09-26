@@ -41,16 +41,13 @@ namespace Ejemplo_PlantillaSkeleton
         //Variables	que	almacenan	el	radio	de	cada	uno	de	los	círculos.
         double dRadioC1, dRadioC2;
         DispatcherTimer goalHTimer;
+        DispatcherTimer progressTimer;
+        int iCont = 10;
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
         {
             InitializeComponent();
-
-            //Calcula	la	coordenada	del	centro	del	aro
-            dXC = (double)CirculoInRH.GetValue(Canvas.LeftProperty) + (CirculoInRH.Width / 2);
-            dYC = (double)CirculoInRH.GetValue(Canvas.TopProperty) + (CirculoInRH.Height / 2);
-
             //Calcular	el	radio	de	cada	uno	de	los	círculos
             dRadioC1 = CirculoOutRH.Width / 2;
             dRadioC2 = CirculoInRH.Width / 2;
@@ -59,6 +56,12 @@ namespace Ejemplo_PlantillaSkeleton
             goalHTimer.Interval = new TimeSpan(0, 0, 0, 0, 40);
             goalHTimer.Tick += new EventHandler(MoveHandGoal);
             goalHTimer.IsEnabled = true;
+
+            //Timer para la barra de progreso
+            progressTimer = new DispatcherTimer();
+            progressTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            progressTimer.Tick += new EventHandler(TimerBar);
+            progressTimer.IsEnabled = false;
 
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
@@ -106,6 +109,14 @@ namespace Ejemplo_PlantillaSkeleton
                 pointerRHand.SetValue(Canvas.LeftProperty, joint_X);
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
+                if (checarDistancia(pointerRHand, CirculoInRH))
+                {
+                    CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
+                }
+                else
+                {
+                    CirculoOutRH.Fill = Brushes.Green;      //Sí	se	encuentra
+                }
             }
             //	Si	lHand está	listo	obtener	las	coordenadas
             if (lHand.TrackingState == JointTrackingState.Tracked)
@@ -119,6 +130,14 @@ namespace Ejemplo_PlantillaSkeleton
                 pointerLHand.SetValue(Canvas.LeftProperty, joint_X);
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
+                if (checarDistancia(pointerLHand, CirculoInLH))
+                {
+                    CirculoOutLH.Fill = Brushes.Red; //No	se	encuentra
+                }
+                else
+                {
+                    CirculoOutLH.Fill = Brushes.Green;      //Sí	se	encuentra
+                }
             }
             //	Si	rShoulder está	listo	obtener	las	coordenadas
             if (rShoulder.TrackingState == JointTrackingState.Tracked)
@@ -198,33 +217,21 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-            //	Si	el	Joint	está	listo	obtener	las	coordenadas
-            if (joint1.TrackingState == JointTrackingState.Tracked)
-            {
-                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
-                joint_Point = this.SkeletonPointToScreen(joint1.Position);
-                dMano_X = joint_Point.X;
-                dMano_Y = joint_Point.Y;
-                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
-                Puntero.SetValue(Canvas.TopProperty, dMano_Y);
-                Puntero.SetValue(Canvas.LeftProperty, dMano_X);
-                //	Obtiene	el	Id	de	la	persona	mapeada
-                LID.Content = skeleton.TrackingId;
-                //	Verificar	si	el	círculo	rojo	se	encuentra	dentro	de	la	trayectoria
-                if (checarDistancia())
-                {
-                    CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
-                }
-                else
-                {
-                    CirculoOutRH.Fill = Brushes.Green;      //Sí	se	encuentra
-                }
-            }
+            
         }
         /* ------------------------------------------------------------------------- */
 
         /* --------------------------- Métodos Nuevos ------------------------------ */
+        private void TimerBar(object sender, EventArgs e)
+        {
+            if (iCont == 0)
+                return;
+            progressbar.Maximum = 10;
+            progressbar.Value++;
+            iCont--;
+            tiempo.Content = "Tiempo: " + iCont;
 
+        }
         /// <summary>
         /// Metodo que convierte un "SkeletonPoint" a "DepthSpace", esto nos permite poder representar las coordenadas de los Joints
         /// en nuestra ventana en las dimensiones deseadas.
@@ -322,8 +329,10 @@ namespace Ejemplo_PlantillaSkeleton
             this.usarSkeleton(skeleton);
         }
 
-        private bool checarDistancia()
+        private bool checarDistancia(Ellipse Puntero, Ellipse Circulo)
         {
+            dXC = (double)Circulo.GetValue(Canvas.LeftProperty) + (Circulo.Width / 2);
+            dYC = (double)Circulo.GetValue(Canvas.TopProperty) + (Circulo.Height / 2);
             //Obtiene	la	coordenada	del	centro	del	círculo	que	mueve	la	persona
             double dX1 = (double)Puntero.GetValue(Canvas.LeftProperty) + (Puntero.Width / 2);
             double dY1 = (double)Puntero.GetValue(Canvas.TopProperty) + (Puntero.Height / 2);
