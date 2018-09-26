@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Stretching Trainer" Height="735" Width="770" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
-        <Canvas	Name="MainCanvas" Width="640" Height="480" Background="Azure" HorizontalAlignment="Center" Margin="61,112">
+        <Image Name="Image" Width="640" Height="480"/>
+        <Canvas	Name="MainCanvas" Width="640" Height="480"  HorizontalAlignment="Center" Margin="61,112">
             <Ellipse x:Name="CirculoOutRH" Width="150" Height="150"	Canvas.Left="360" Canvas.Top="216" Fill="Red"/>
             <Ellipse x:Name="CirculoInRH" Width="50" Height="50"	Canvas.Left="412" Canvas.Top="267" Fill="Azure"/>
             <Ellipse x:Name="GoalRH" Width="30" Height="30" Canvas.Left="421" Canvas.Top="338" Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
@@ -31,6 +32,5 @@
         <Label x:Name="L3" Content="ID:" FontSize="15" FontWeight="Bold" Background="Bisque" HorizontalAlignment="Left"	VerticalAlignment="Top" Margin="305,628,0,0"/>
         <Label x:Name="LID"	Content="0"	FontSize="15" Foreground="#FFDA2828" HorizontalAlignment="Left"	VerticalAlignment="Top"	Margin="344,628,0,0"/>
         <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="26" Margin="524,566,0,0" VerticalAlignment="Top" Width="177"/>
-
     </Grid>
 </Window>

@@ -37,6 +37,8 @@ namespace Ejemplo_PlantillaSkeleton
         DispatcherTimer progressTimer;
         int iCont = 8;
         int Ejercicio = 1;
+        private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
+        private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
@@ -61,6 +63,15 @@ namespace Ejemplo_PlantillaSkeleton
             Kinect_Config();
         }
         /* -- Área para el método que utiliza los datos proporcionados por Kinect -- */
+        /// <summary>
+        /// Método que realiza las manipulaciones necesarias sobre el arreglo de bytes que contiene la
+        /// información de los pixeles
+        /// </summary>
+        private void usarCamara()
+        {
+            // Escribir los datos en el Bitmap
+            this.imagen.WritePixels(new Int32Rect(0, 0, this.imagen.PixelWidth, this.imagen.PixelHeight), this.cantidadPixeles, this.imagen.PixelWidth * sizeof(int), 0);
+        }
         /// <summary>
         /// Método que realiza las manipulaciones necesarias sobre el Skeleton trazado
         /// </summary>
@@ -288,6 +299,20 @@ namespace Ejemplo_PlantillaSkeleton
 
                 // Enlistar al evento que se ejecuta cada vez que el Kinect tiene datos listos
                 this.miKinect.SkeletonFrameReady += this.Kinect_FrameReady;
+                // Habilitar ColorStream con una resolución de 640x480 a una razón de 30 frames / seg
+                this.miKinect.ColorStream.Enable(ColorImageFormat.RgbResolution640x480Fps30);
+
+                // Enlistar la función que se llamará cada vez que el Kinect tiene listo un frame de datos
+                this.miKinect.ColorFrameReady += this.Kinect_FrameReady;
+
+                // Crear el arreglo que recibe los datos de los pixeles, FramePixelDataLength es el número de bytes en el frame
+                this.cantidadPixeles = new byte[this.miKinect.ColorStream.FramePixelDataLength];
+
+                // Crear el WriteableBitmap que tendrá la imagen
+                this.imagen = new WriteableBitmap(this.miKinect.ColorStream.FrameWidth, this.miKinect.ColorStream.FrameHeight, 96.0, 96.0, PixelFormats.Bgr32, null);
+
+                // Asignar la imagen como fuente para ser mostrada en la ventana
+                this.Image.Source = this.imagen;
                 /* ---------------------------------------------------------------- */
 
                 // Enlistar el método que se llama cada vez que hay un cambio en el estado del Kinect
@@ -308,6 +333,24 @@ namespace Ejemplo_PlantillaSkeleton
             {
                 // Enlistar el método que se llama cada vez que hay un cambio en el estado del Kinect
                 KinectSensor.KinectSensors.StatusChanged += Kinect_StatusChanged;
+            }
+        }
+        /// <summary>
+        /// Método que adquiere los datos que envia el Kinect, su contenido varía según la tecnología 
+        /// que se esté utilizando (Cámara, SkeletonTraking, DepthSensor, etc)
+        /// </summary>
+        private void Kinect_FrameReady(object sender, ColorImageFrameReadyEventArgs e)
+        {
+            using (ColorImageFrame colorFrame = e.OpenColorImageFrame())
+            {
+                if (colorFrame != null)
+                {
+                    // Copiar los datos(referentes a los pixeles) del frame a un arreglo
+                    colorFrame.CopyPixelDataTo(this.cantidadPixeles);
+
+                    // Manipular los bytes en el arreglo
+                    usarCamara();
+                }
             }
         }
         /// <summary>
