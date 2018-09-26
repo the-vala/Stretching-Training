@@ -41,12 +41,13 @@ namespace Ejemplo_PlantillaSkeleton
         //Variables	que	almacenan	el	radio	de	cada	uno	de	los	círculos.
         double dRadioC1, dRadioC2;
         DispatcherTimer goalHTimer;
+        DispatcherTimer progressTimer;
+        int iCont = 10;
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
         {
             InitializeComponent();
-
             //Calcula	la	coordenada	del	centro	del	aro
             dXC = (double)CirculoInRH.GetValue(Canvas.LeftProperty) + (CirculoInRH.Width / 2);
             dYC = (double)CirculoInRH.GetValue(Canvas.TopProperty) + (CirculoInRH.Height / 2);
@@ -59,6 +60,12 @@ namespace Ejemplo_PlantillaSkeleton
             goalHTimer.Interval = new TimeSpan(0, 0, 0, 0, 40);
             goalHTimer.Tick += new EventHandler(MoveHandGoal);
             goalHTimer.IsEnabled = true;
+
+            //Timer para la barra de progreso
+            progressTimer = new DispatcherTimer();
+            progressTimer.Interval = new TimeSpan(0, 0, 0, 1, 0);
+            progressTimer.Tick += new EventHandler(TimerBar);
+            progressTimer.IsEnabled = false;
 
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
@@ -214,17 +221,28 @@ namespace Ejemplo_PlantillaSkeleton
                 if (checarDistancia())
                 {
                     CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
+                    progressTimer.IsEnabled = false;
                 }
                 else
                 {
                     CirculoOutRH.Fill = Brushes.Green;      //Sí	se	encuentra
+                    progressTimer.IsEnabled = true;
                 }
             }
         }
         /* ------------------------------------------------------------------------- */
 
         /* --------------------------- Métodos Nuevos ------------------------------ */
+        private void TimerBar(object sender, EventArgs e)
+        {
+            if (iCont == 0)
+                return;
+            progressbar.Maximum = 10;
+            progressbar.Value++;
+            iCont--;
+            tiempo.Content = "Tiempo: " + iCont;
 
+        }
         /// <summary>
         /// Metodo que convierte un "SkeletonPoint" a "DepthSpace", esto nos permite poder representar las coordenadas de los Joints
         /// en nuestra ventana en las dimensiones deseadas.
