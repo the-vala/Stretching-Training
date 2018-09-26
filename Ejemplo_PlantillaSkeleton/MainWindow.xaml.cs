@@ -20,23 +20,29 @@ using System.Windows.Threading;
 
 namespace Ejemplo_PlantillaSkeleton
 {
+    /// <summary>
+    /// Capítulo: Reflejar el movimiento con imágenes
+    /// Ejemplo: Obtener la posición de la mano derecha (De cualquier persona, no se selecciona cual)
+    /// Descripción: 
+    ///              Este sencillo ejemplo muestra una ventana con un círculo del cual, su movimiento, refleja el 
+    ///              movimiento de la mano derecha. Conforme se mueve la mano se mueve el círculo.
+    /// </summary>
     public partial class MainWindow : Window
     {
         private KinectSensor miKinect;  //Representa el Kinect conectado
 
         /* ----------------------- Área para las variables ------------------------- */
+        double dMano_X;            //Representa la coordenada X de la mano derecha
+        double dMano_Y;            //Representa la coordenada Y de la mano derecha
         double joint_X;            //Representa la coordenada X del joint
         double joint_Y;            //Representa la coordenada Y del joint
         Point joint_Point = new Point(); //Permite obtener los datos del Joint
         double dXC, dYC;
         //Variables	que	almacenan	el	radio	de	cada	uno	de	los	círculos.
         double dRadioC1, dRadioC2;
-        //Timer animación circulos
         DispatcherTimer goalHTimer;
-        //Timer barra de progreso
         DispatcherTimer progressTimer;
-        int iCont = 8;
-        int Ejercicio = 1;
+        int iCont = 10;
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
@@ -211,25 +217,16 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-            if (checarDistancia(pointerRHand, CirculoInRH) && checarDistancia(pointerLHand, CirculoInLH))
-                progressTimer.IsEnabled = false;
-            else
-                progressTimer.IsEnabled = true;
+            
         }
         /* ------------------------------------------------------------------------- */
 
         /* --------------------------- Métodos Nuevos ------------------------------ */
-        
         private void TimerBar(object sender, EventArgs e)
         {
             if (iCont == 0)
-            {
-                Ejercicio++;
-                ejercicio.Content = "Ejercicio# " + Ejercicio;
-                iCont = 8;
                 return;
-            }
-            progressbar.Maximum = 8;
+            progressbar.Maximum = 10;
             progressbar.Value++;
             iCont--;
             tiempo.Content = "Tiempo: " + iCont;
@@ -250,22 +247,10 @@ namespace Ejemplo_PlantillaSkeleton
         double anguloLH = 0;
         private void MoveHandGoal(object sender, EventArgs e)
         {
-            switch(Ejercicio)
-            {
-                case 1:
-                    anguloRH -= 10;
-                    GoalRH.RenderTransform = new RotateTransform(anguloRH);
-                    anguloLH += 10;
-                    GoalLH.RenderTransform = new RotateTransform(anguloLH);
-                    break;
-                case 2:
-                    CirculoInRH.Visibility = Visibility.Hidden;
-                    CirculoInLH.Visibility = Visibility.Hidden;
-                    CirculoOutRH.Visibility = Visibility.Hidden;
-                    CirculoOutLH.Visibility = Visibility.Hidden;
-                    break;
-            }
-            
+            anguloRH -= 10;
+            GoalRH.RenderTransform = new RotateTransform(anguloRH);
+            anguloLH += 10;
+            GoalLH.RenderTransform = new RotateTransform(anguloLH);
         }
         /* ------------------------------------------------------------------------- */
 
