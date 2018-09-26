@@ -31,6 +31,5 @@
         <Label x:Name="L3" Content="ID:" FontSize="15" FontWeight="Bold" Background="Bisque" HorizontalAlignment="Left"	VerticalAlignment="Top" Margin="305,628,0,0"/>
         <Label x:Name="LID"	Content="0"	FontSize="15" Foreground="#FFDA2828" HorizontalAlignment="Left"	VerticalAlignment="Top"	Margin="344,628,0,0"/>
         <ProgressBar x:Name="progressbar" HorizontalAlignment="Left" Height="26" Margin="524,566,0,0" VerticalAlignment="Top" Width="177"/>
-
     </Grid>
 </Window>

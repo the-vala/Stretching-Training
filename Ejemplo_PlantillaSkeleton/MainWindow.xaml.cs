@@ -241,8 +241,8 @@ namespace Ejemplo_PlantillaSkeleton
             progressbar.Value++;
             iCont--;
             tiempo.Content = "Tiempo: " + iCont;
-
         }
+
         /// <summary>
         /// Metodo que convierte un "SkeletonPoint" a "DepthSpace", esto nos permite poder representar las coordenadas de los Joints
         /// en nuestra ventana en las dimensiones deseadas.
