@@ -5,13 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ejemplo_PlantillaSkeleton"
         mc:Ignorable="d"
-        Title="MainWindow" Height="735" Width="770" Closing="Window_Closing">
+        Title="Stretching Trainer" Height="735" Width="770" Closing="Window_Closing" ResizeMode="NoResize">
     <Grid>
         <Canvas	Name="MainCanvas" Width="640" Height="480" Grid.Row="1" Background="Azure" HorizontalAlignment="Center">
             <Ellipse x:Name="CirculoOutRH" Width="150" Height="150"	Canvas.Left="420" Canvas.Top="132" Fill="Red"/>
             <Ellipse x:Name="CirculoInRH" Width="100" Height="100"	Canvas.Left="444" Canvas.Top="158" Fill="Azure"/>
             <Ellipse x:Name="GoalRH" Width="30" Height="30" Canvas.Left="481" Canvas.Top="254" Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
-            <Ellipse x:Name="Puntero" Width="30" Height="30" Canvas.Left="540" Canvas.Top="371"	Fill="Orange"/>
             <Ellipse x:Name="CirculoOutLH" Width="150" Height="150"	Canvas.Left="77" Canvas.Top="132" Fill="Red"/>
             <Ellipse x:Name="CirculoInLH" Width="100" Height="100"	Canvas.Left="101" Canvas.Top="158" Fill="Azure"/>
             <Ellipse x:Name="GoalLH" Width="30" Height="30" Canvas.Left="137" Canvas.Top="254"	Fill="Yellow" RenderTransformOrigin="0.5,-1.55"/>
