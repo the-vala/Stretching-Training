@@ -96,3 +96,19 @@ D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Deb
 D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.g.resources
 D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.Properties.Resources.resources
 D:\Users\Vala\Source\Repos\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csproj.GenerateResource.Cache
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.exe.config
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.exe
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.pdb
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.exe
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Ejemplo_PlantillaSkeleton.pdb
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Microsoft.Kinect.dll
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\bin\Debug\Microsoft.Kinect.xml
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csprojResolveAssemblyReference.cache
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\MainWindow.g.cs
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\App.g.cs
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton_MarkupCompile.cache
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton_MarkupCompile.lref
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\MainWindow.baml
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.g.resources
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.Properties.Resources.resources
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csproj.GenerateResource.Cache
