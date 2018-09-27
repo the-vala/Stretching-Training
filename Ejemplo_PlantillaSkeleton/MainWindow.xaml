@@ -11,13 +11,13 @@
         <Canvas	Name="MainCanvas" Width="640" Height="480"  HorizontalAlignment="Center" Margin="61,112">
             <Ellipse x:Name="CirculoOutRH" Width="150" Height="150"	Canvas.Left="360" Canvas.Top="216" Fill="Red" Visibility="Hidden" Opacity="0.5"/>
             <Ellipse x:Name="CirculoInRH" Width="50" Height="50"	Canvas.Left="412" Canvas.Top="267" Fill="Azure" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="VerticalR" Fill="Red" Height="192" Canvas.Left="379" Canvas.Top="174" Width="60" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="HorizontalR" Fill="Red" Height="60" Canvas.Left="379" Canvas.Top="116" Width="200" Visibility="Hidden" Opacity="0.5"/>
+            <Rectangle x:Name="VerticalR" Fill="Red" Height="192" Canvas.Left="379" Canvas.Top="174" Width="60" Opacity="0.5" Visibility="Hidden"/>
+            <Rectangle x:Name="HorizontalR" Fill="Red" Height="60" Canvas.Left="379" Canvas.Top="116" Width="200" Opacity="0.5" Visibility="Hidden"/>
 
             <Ellipse x:Name="CirculoOutLH" Width="150" Height="150"	Canvas.Left="137" Canvas.Top="216" Fill="Red" Visibility="Hidden" Opacity="0.5"/>
             <Ellipse x:Name="CirculoInLH" Width="50" Height="50" Canvas.Left="186" Canvas.Top="267" Fill="Azure" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="VerticalL" Fill="Red" Height="192" Canvas.Left="210" Canvas.Top="174" Width="60" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="HorizontalL" Fill="Red" Height="60" Canvas.Left="70" Canvas.Top="114" Width="200" Visibility="Hidden" Opacity="0.5"/>
+            <Rectangle x:Name="VerticalL" Fill="Red" Height="192" Canvas.Left="210" Canvas.Top="174" Width="60" Opacity="0.5" Visibility="Hidden"/>
+            <Rectangle x:Name="HorizontalL" Fill="Red" Height="60" Canvas.Left="70" Canvas.Top="114" Width="200" Opacity="0.5" Visibility="Hidden"/>
             <Ellipse x:Name="pointerHead" Width="30" Height="30" Canvas.Left="300" Canvas.Top="10"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerRHand" Width="30" Height="30" Canvas.Left="508" Canvas.Top="392"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerLHand" Width="30" Height="30" Canvas.Left="97" Canvas.Top="392"	Fill="#FFFF00E5"/>

@@ -39,6 +39,7 @@ namespace Ejemplo_PlantillaSkeleton
         int Ejercicio = 1;
         private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
         private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
+        int iPixeles = 5;
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
@@ -324,10 +325,12 @@ namespace Ejemplo_PlantillaSkeleton
                     HorizontalL.Visibility = Visibility.Visible;
                     VerticalR.Visibility = Visibility.Visible;
                     HorizontalR.Visibility = Visibility.Visible;
-                    GoalLH.SetValue(Canvas.TopProperty, 336.0);
-                    GoalLH.SetValue(Canvas.LeftProperty, 210.0);
-                    GoalRH.SetValue(Canvas.TopProperty, 336.0);
-                    GoalRH.SetValue(Canvas.LeftProperty, 376.0);
+                    GoalRH.RenderTransform = new RotateTransform(0);
+                    GoalLH.RenderTransform = new RotateTransform(0);
+                    GoalLH.SetValue(Canvas.TopProperty, (double)VerticalL.GetValue(Canvas.TopProperty) + VerticalL.Height);
+                    GoalLH.SetValue(Canvas.LeftProperty, (double)VerticalL.GetValue(Canvas.LeftProperty) + (VerticalL.Width / 1.0));
+                    GoalRH.SetValue(Canvas.TopProperty, (double)VerticalL.GetValue(Canvas.TopProperty) + VerticalL.Height);
+                    GoalRH.SetValue(Canvas.LeftProperty, (double)VerticalR.GetValue(Canvas.LeftProperty) + (VerticalR.Width / 1.0));
                     break;
                 case 3:
                     VerticalL.Visibility = Visibility.Hidden;
@@ -352,17 +355,37 @@ namespace Ejemplo_PlantillaSkeleton
                     GoalLH.RenderTransform = new RotateTransform(anguloLH);
                     break;
                 case 2:
-                    if (alturaL < 210)
-                    {
-                        alturaL += 5;
-                        GoalLH.SetValue(Canvas.TopProperty, 336.0 + alturaL);
+                    //Coordenada	de	la	esquina	superior	izquierda	de	la	elipse
+                    double dPosYLH = (double)GoalLH.GetValue(Canvas.TopProperty);
+                    double dPosXLH = (double)GoalLH.GetValue(Canvas.LeftProperty);
+                    double dPosXRH = (double)GoalRH.GetValue(Canvas.LeftProperty);
+
+                    if (iPixeles > 0)
+                    {               //Movimiento	hacia	abajo
+                        if (dPosXLH + iPixeles < (double)VerticalL.GetValue(Canvas.LeftProperty) + (VerticalL.Width / 2))
+                        {
+                            dPosXLH += iPixeles;
+                            dPosXRH -= iPixeles;
+                        }
+                        else if (dPosYLH + GoalLH.Height + iPixeles < (double)VerticalL.GetValue(Canvas.TopProperty) + VerticalL.Height)
+                            dPosYLH = dPosYLH + iPixeles;
+                        else iPixeles = iPixeles * -1;  //Cambio	de	dirección	del	movimiento
                     }
                     else
-                    {
-                        GoalLH.SetValue(Canvas.LeftProperty, 210.0 + alturaL);
+                    {           //Movimiento	hacia	arriba
+                        if (dPosYLH + iPixeles > (double)HorizontalL.GetValue(Canvas.TopProperty))
+                            dPosYLH = dPosYLH + iPixeles;
+                        else if (dPosXLH + iPixeles > (double)HorizontalL.GetValue(Canvas.LeftProperty))
+                        {
+                            dPosXLH += iPixeles;
+                            dPosXRH -= iPixeles; 
+                        } else iPixeles = iPixeles * -1;  //Cambio	de	dirección	del	movimiento
                     }
-                    
-
+                    //Mueve	la	pelota	a	la	nueva	coordenada
+                    GoalLH.SetValue(Canvas.TopProperty, dPosYLH);
+                    GoalRH.SetValue(Canvas.TopProperty, dPosYLH);
+                    GoalLH.SetValue(Canvas.LeftProperty, dPosXLH);
+                    GoalRH.SetValue(Canvas.LeftProperty, dPosXRH);
                     break;
             }
             
