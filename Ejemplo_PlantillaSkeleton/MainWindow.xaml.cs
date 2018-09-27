@@ -35,8 +35,8 @@ namespace Ejemplo_PlantillaSkeleton
         DispatcherTimer goalHTimer;
         //Timer barra de progreso
         DispatcherTimer progressTimer;
-        int iCont = 8;
-        int Ejercicio = 1;
+        int iCont = 1;
+        int Ejercicio = 0;
         private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
         private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
         /* ------------------------------------------------------------------------- */
@@ -104,6 +104,14 @@ namespace Ejemplo_PlantillaSkeleton
                 pointerHead.SetValue(Canvas.LeftProperty, joint_X);
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
+                if(ChecarDistancia3(pointerHead, CirculoHead))
+                {
+                    CirculoHead.Fill = Brushes.Green;
+                }
+                else
+                {
+                    CirculoHead.Fill = Brushes.Red;
+                }
             }
             //	Si	rHand está	listo	obtener	las	coordenadas
             if (rHand.TrackingState == JointTrackingState.Tracked)
@@ -117,14 +125,41 @@ namespace Ejemplo_PlantillaSkeleton
                 pointerRHand.SetValue(Canvas.LeftProperty, joint_X);
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
-                if (checarDistancia(pointerRHand, CirculoInRH))
+                switch(Ejercicio)
                 {
-                    CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
+                    case 0:
+                    case 4:
+                        if (ChecarDistancia3(pointerRHand, CirculoStart))
+                        {
+                            progressTimer.IsEnabled = true;
+                            CirculoStart.Fill = Brushes.Green;
+                        }
+                        else
+                        {
+                            progressTimer.IsEnabled = false;
+                            CirculoStart.Fill = Brushes.Red;
+                        }
+                        break;
+                    case 1:
+                        if (checarDistancia(pointerRHand, CirculoInRH))
+                            CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
+                        else
+                            CirculoOutRH.Fill = Brushes.Green;      //Sí	se	encuentra
+                        break;
+                    case 2:
+                        if (ChecarDistancia2(pointerRHand, VerticalR, HorizontalR))
+                        {
+                            VerticalR.Fill = Brushes.Green;
+                            HorizontalR.Fill = Brushes.Green;
+                        }
+                        else
+                        {
+                            VerticalR.Fill = Brushes.Red;
+                            HorizontalR.Fill = Brushes.Red;
+                        }
+                        break;
                 }
-                else
-                {
-                    CirculoOutRH.Fill = Brushes.Green;      //Sí	se	encuentra
-                }
+                
             }
             //	Si	lHand está	listo	obtener	las	coordenadas
             if (lHand.TrackingState == JointTrackingState.Tracked)
@@ -138,14 +173,28 @@ namespace Ejemplo_PlantillaSkeleton
                 pointerLHand.SetValue(Canvas.LeftProperty, joint_X);
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
-                if (checarDistancia(pointerLHand, CirculoInLH))
+                switch (Ejercicio)
                 {
-                    CirculoOutLH.Fill = Brushes.Red; //No	se	encuentra
+                    case 1:
+                        if (checarDistancia(pointerLHand, CirculoInLH))
+                            CirculoOutLH.Fill = Brushes.Red; //No	se	encuentra
+                        else
+                            CirculoOutLH.Fill = Brushes.Green;      //Sí	se	encuentra
+                        break;
+                    case 2:
+                        if (ChecarDistancia2(pointerLHand, VerticalL, HorizontalL))
+                        {
+                            VerticalL.Fill = Brushes.Green;
+                            HorizontalL.Fill = Brushes.Green;
+                        }
+                        else
+                        {
+                            VerticalL.Fill = Brushes.Red;
+                            HorizontalL.Fill = Brushes.Red;
+                        }
+                        break;
                 }
-                else
-                {
-                    CirculoOutLH.Fill = Brushes.Green;      //Sí	se	encuentra
-                }
+                
             }
             //	Si	rShoulder está	listo	obtener	las	coordenadas
             if (rShoulder.TrackingState == JointTrackingState.Tracked)
@@ -173,7 +222,6 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-           
             //	Si	rElbow está	listo	obtener	las	coordenadas
             if (rElbow.TrackingState == JointTrackingState.Tracked)
             {
@@ -200,11 +248,28 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-            //	Si	spine está	listo	obtener	las	coordenadas
-            if (checarDistancia(pointerRHand, CirculoInRH) && checarDistancia(pointerLHand, CirculoInLH))
-                progressTimer.IsEnabled = false;
-            else
-                progressTimer.IsEnabled = true;
+            switch(Ejercicio)
+            {
+                case 1:
+                    if (checarDistancia(pointerRHand, CirculoInRH) && checarDistancia(pointerLHand, CirculoInLH))
+                        progressTimer.IsEnabled = false;
+                    else
+                        progressTimer.IsEnabled = true;
+                    break;
+                case 2:
+                    if (ChecarDistancia2(pointerLHand,VerticalL,HorizontalL) && ChecarDistancia2(pointerRHand, VerticalR, HorizontalR))
+                        progressTimer.IsEnabled = true;
+                    else
+                        progressTimer.IsEnabled = false;
+                    break;
+                case 3:
+                    if (ChecarDistancia3(pointerHead, CirculoHead))
+                        progressTimer.IsEnabled = true;
+                    else
+                        progressTimer.IsEnabled = false;
+                    break;
+            }
+            
         }
         /* ------------------------------------------------------------------------- */
 
@@ -214,14 +279,23 @@ namespace Ejemplo_PlantillaSkeleton
         {
             if (iCont == 0)
             {
-                Ejercicio++;
+                if (Ejercicio == 4)
+                    Ejercicio = 1;
+                else
+                    Ejercicio++;
                 ChangeExcersise();
-                ejercicio.Content = "Ejercicio# " + Ejercicio;
-                iCont = 8;
+                ejercicio.Content = "Estiramiento# " + Ejercicio;
+                if (Ejercicio == 4)
+                    iCont = 1;
+                else
+                    iCont = 8;
                 progressbar.Value = 0;
                 return;
             }
-            progressbar.Maximum = 8;
+            if(Ejercicio == 0 || Ejercicio == 4)
+                progressbar.Maximum = 1;
+            else
+                progressbar.Maximum = 8;
             progressbar.Value++;
             iCont--;
             tiempo.Content = "Tiempo: " + iCont;
@@ -242,7 +316,12 @@ namespace Ejemplo_PlantillaSkeleton
         {
             switch (Ejercicio)
             {
+                case 0:
+                    Start.Text = "Comenzar Estiramientos";
+                    break;
                 case 1:
+                    CirculoStart.Visibility = Visibility.Hidden;
+                    Start.Visibility = Visibility.Hidden;
                     CirculoInRH.Visibility = Visibility.Visible;
                     CirculoInLH.Visibility = Visibility.Visible;
                     CirculoOutRH.Visibility = Visibility.Visible;
@@ -257,10 +336,29 @@ namespace Ejemplo_PlantillaSkeleton
                     HorizontalL.Visibility = Visibility.Visible;
                     VerticalR.Visibility = Visibility.Visible;
                     HorizontalR.Visibility = Visibility.Visible;
+                    GoalRH.RenderTransform = new RotateTransform(0);
+                    GoalLH.RenderTransform = new RotateTransform(0);
                     GoalLH.SetValue(Canvas.TopProperty, 336.0);
                     GoalLH.SetValue(Canvas.LeftProperty, 210.0);
                     GoalRH.SetValue(Canvas.TopProperty, 336.0);
                     GoalRH.SetValue(Canvas.LeftProperty, 376.0);
+                    break;
+                case 3:
+                    VerticalL.Visibility = Visibility.Hidden;
+                    HorizontalL.Visibility = Visibility.Hidden;
+                    VerticalR.Visibility = Visibility.Hidden;
+                    HorizontalR.Visibility = Visibility.Hidden;
+                    GoalLH.Visibility = Visibility.Hidden;
+                    GoalRH.Visibility = Visibility.Hidden;
+                    GoalHead.Visibility = Visibility.Visible;
+                    CirculoHead.Visibility = Visibility.Visible;
+                    break;
+                case 4:
+                    GoalHead.Visibility = Visibility.Hidden;
+                    CirculoHead.Visibility = Visibility.Hidden;
+                    CirculoStart.Visibility = Visibility.Visible;
+                    Start.Visibility = Visibility.Visible;
+                    Start.Text = "Volver a empezar";
                     break;
             }
         }
@@ -268,6 +366,7 @@ namespace Ejemplo_PlantillaSkeleton
         double anguloRH = 360;
         double anguloLH = 0;
         int alturaL = 0;
+        double anguloHead = 360;
         private void MoveHandGoal(object sender, EventArgs e)
         {
             switch(Ejercicio)
@@ -282,10 +381,16 @@ namespace Ejemplo_PlantillaSkeleton
                     if (alturaL < 210)
                     {
                         alturaL += 5;
-                        GoalLH.SetValue(Canvas.TopProperty, 210.0 + alturaL);
+                        GoalLH.SetValue(Canvas.TopProperty, 336.0 + alturaL);
                     }
-                    
-
+                    else
+                    {
+                        GoalLH.SetValue(Canvas.LeftProperty, 210.0 + alturaL);
+                    }
+                    break;
+                case 3:
+                    anguloHead -= 10;
+                    GoalHead.RenderTransform = new RotateTransform(anguloHead);
                     break;
             }
             
@@ -414,6 +519,32 @@ namespace Ejemplo_PlantillaSkeleton
             //o	menor	al	círculo	más	pequeño,	entonces	el	círculo	rojo	
             //se	ha	salido	del	trayecto.
             return (dDistancia > dRadioC1 || dDistancia < dRadioC2);
+        }
+
+        private bool ChecarDistancia2(Ellipse Puntero, Rectangle Ver, Rectangle Hor)
+        {
+            return (Collision(Puntero, Ver) || Collision(Puntero, Hor));
+        }
+
+        
+        private bool ChecarDistancia3(Ellipse Puntero, Ellipse Circulo)
+        {
+            dXC = (double)Circulo.GetValue(Canvas.LeftProperty) + (Circulo.Width / 2);
+            dYC = (double)Circulo.GetValue(Canvas.TopProperty) + (Circulo.Height / 2);
+
+            double dX1 = (double)Puntero.GetValue(Canvas.LeftProperty) + (Puntero.Width / 2);
+            double dY1 = (double)Puntero.GetValue(Canvas.TopProperty) + (Puntero.Height / 2);
+            double dDistancia = Math.Sqrt(Math.Pow(dXC - dX1, 2) + Math.Pow(dYC - dY1, 2));
+            return (dDistancia < Circulo.Width / 2);
+        }
+
+        private bool Collision(Ellipse Puntero, Rectangle Rec)
+        {
+            double dX = (double)Puntero.GetValue(Canvas.LeftProperty) + (Puntero.Width / 2);
+            double dY = (double)Puntero.GetValue(Canvas.TopProperty) + (Puntero.Height / 2);
+            double ancho = (double)Rec.GetValue(Canvas.LeftProperty);
+            double largo = (double)Rec.GetValue(Canvas.TopProperty);
+            return ((dX >= ancho && dX <= ancho+Rec.Width) && (dY >= largo && dY <= largo+Rec.Height));
         }
 
         /// <summary>
