@@ -338,9 +338,9 @@ namespace Ejemplo_PlantillaSkeleton
                     GoalRH.RenderTransform = new RotateTransform(0);
                     GoalLH.RenderTransform = new RotateTransform(0);
                     GoalLH.SetValue(Canvas.TopProperty, (double)VerticalL.GetValue(Canvas.TopProperty) + VerticalL.Height);
-                    GoalLH.SetValue(Canvas.LeftProperty, (double)VerticalL.GetValue(Canvas.LeftProperty) + (VerticalL.Width / 1.0));
+                    GoalLH.SetValue(Canvas.LeftProperty, (double)VerticalL.GetValue(Canvas.LeftProperty) + (VerticalL.Width / 4.0));
                     GoalRH.SetValue(Canvas.TopProperty, (double)VerticalL.GetValue(Canvas.TopProperty) + VerticalL.Height);
-                    GoalRH.SetValue(Canvas.LeftProperty, (double)VerticalR.GetValue(Canvas.LeftProperty) + (VerticalR.Width / 1.0));
+                    GoalRH.SetValue(Canvas.LeftProperty, (double)VerticalR.GetValue(Canvas.LeftProperty) + (VerticalR.Width / 4.0));
                     break;
                 case 3:
                     VerticalL.Visibility = Visibility.Hidden;
@@ -364,7 +364,6 @@ namespace Ejemplo_PlantillaSkeleton
 
         double anguloRH = 360;
         double anguloLH = 0;
-        int alturaL = 0;
         double anguloHead = 360;
         private void MoveHandGoal(object sender, EventArgs e)
         {
