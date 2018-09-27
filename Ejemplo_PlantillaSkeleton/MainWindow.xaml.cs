@@ -324,6 +324,8 @@ namespace Ejemplo_PlantillaSkeleton
                     CirculoInLH.Visibility = Visibility.Visible;
                     CirculoOutRH.Visibility = Visibility.Visible;
                     CirculoOutLH.Visibility = Visibility.Visible;
+                    GoalLH.Visibility = Visibility.Visible;
+                    GoalRH.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     CirculoInRH.Visibility = Visibility.Hidden;
