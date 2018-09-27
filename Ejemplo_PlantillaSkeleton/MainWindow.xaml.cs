@@ -16,8 +16,8 @@ using System.Windows.Shapes;
 using Microsoft.Kinect;
 using System.IO;
 using System.Windows.Threading;
-/*---------------------------*/
 
+/*---------------------------*/
 namespace Ejemplo_PlantillaSkeleton
 {
     public partial class MainWindow : Window
@@ -39,6 +39,12 @@ namespace Ejemplo_PlantillaSkeleton
         int Ejercicio = 0;
         private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
         private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
+        MediaPlayer fondo = new MediaPlayer();
+        MediaPlayer tip1 = new MediaPlayer();
+        MediaPlayer tip2 = new MediaPlayer();
+        MediaPlayer tip3 = new MediaPlayer();
+
+
         /* ------------------------------------------------------------------------- */
 
         public MainWindow()
@@ -60,10 +66,10 @@ namespace Ejemplo_PlantillaSkeleton
             progressTimer.Tick += new EventHandler(TimerBar);
             progressTimer.IsEnabled = false;
 
+            fondo.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\music.wav"));
+            fondo.Play();
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
-            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"../../assets/music.wav");
-            sp.Play();
         }
         /* -- Área para el método que utiliza los datos proporcionados por Kinect -- */
         /// <summary>
@@ -314,12 +320,16 @@ namespace Ejemplo_PlantillaSkeleton
         
         private void ChangeExcersise()
         {
+
             switch (Ejercicio)
             {
                 case 0:
                     Start.Text = "Comenzar Estiramientos";
                     break;
                 case 1:
+                    tip1.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\audio1.wav"));
+                    fondo.Volume = 0.08;
+                    tip1.Play();
                     CirculoStart.Visibility = Visibility.Hidden;
                     Start.Visibility = Visibility.Hidden;
                     CirculoInRH.Visibility = Visibility.Visible;
@@ -328,6 +338,8 @@ namespace Ejemplo_PlantillaSkeleton
                     CirculoOutLH.Visibility = Visibility.Visible;
                     break;
                 case 2:
+                    tip2.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\audio2.wav"));
+                    tip2.Play();
                     CirculoInRH.Visibility = Visibility.Hidden;
                     CirculoInLH.Visibility = Visibility.Hidden;
                     CirculoOutRH.Visibility = Visibility.Hidden;
@@ -344,6 +356,8 @@ namespace Ejemplo_PlantillaSkeleton
                     GoalRH.SetValue(Canvas.LeftProperty, 376.0);
                     break;
                 case 3:
+                    tip3.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\audio3.wav"));
+                    tip3.Play();
                     VerticalL.Visibility = Visibility.Hidden;
                     HorizontalL.Visibility = Visibility.Hidden;
                     VerticalR.Visibility = Visibility.Hidden;
