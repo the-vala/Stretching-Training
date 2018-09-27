@@ -112,3 +112,4 @@ C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleto
 C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.g.resources
 C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.Properties.Resources.resources
 C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton.csproj.GenerateResource.Cache
+C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\obj\Debug\Ejemplo_PlantillaSkeleton_Content.g.cs

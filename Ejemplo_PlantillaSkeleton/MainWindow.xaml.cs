@@ -62,6 +62,8 @@ namespace Ejemplo_PlantillaSkeleton
 
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
+            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"../../assets/music.wav");
+            sp.Play();
         }
         /* -- Área para el método que utiliza los datos proporcionados por Kinect -- */
         /// <summary>
