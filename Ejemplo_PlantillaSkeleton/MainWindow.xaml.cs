@@ -36,7 +36,7 @@ namespace Ejemplo_PlantillaSkeleton
         //Timer barra de progreso
         DispatcherTimer progressTimer;
         int iCont = 1;
-        int Ejercicio = 1;
+        int Ejercicio = 0;
         private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
         private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
         int iPixeles = 6;
@@ -330,6 +330,10 @@ namespace Ejemplo_PlantillaSkeleton
                     CirculoOutLH.Visibility = Visibility.Visible;
                     GoalLH.Visibility = Visibility.Visible;
                     GoalRH.Visibility = Visibility.Visible;
+                    GoalLH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalLH.SetValue(Canvas.LeftProperty, 197.0);
+                    GoalRH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalRH.SetValue(Canvas.LeftProperty, 420.0);
                     break;
                 case 2:
                     CirculoInRH.Visibility = Visibility.Hidden;

@@ -36,12 +36,12 @@
             <Label x:Name="tiempo" Content="Tiempo: 1" Canvas.Left="473" Canvas.Top="422" Width="97" FontWeight="Bold" FontSize="15"/>
             <Label x:Name="ejercicio" Content="Estiramiento# 0" Canvas.Left="10" Canvas.Top="10" Width="155" FontWeight="Bold" FontSize="15"/>
 
-            <Ellipse x:Name="GoalLH" Height="30" Canvas.Left="197" Canvas.Top="336"  Width="30" RenderTransformOrigin="0.5,-1.55">
+            <Ellipse x:Name="GoalLH" Height="30" Canvas.Left="197" Canvas.Top="336"  Width="30" Visibility="Hidden" RenderTransformOrigin="0.5,-1.55">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="fist_hand.png"/>
                 </Ellipse.Fill>
             </Ellipse>
-            <Ellipse x:Name="GoalRH"  Height="30" Canvas.Left="420" Canvas.Top="336" Width="30" RenderTransformOrigin="0.5,-1.55">
+            <Ellipse x:Name="GoalRH"  Height="30" Canvas.Left="420" Canvas.Top="336" Width="30" Visibility="Hidden" RenderTransformOrigin="0.5,-1.55">
                 <Ellipse.Fill>
                     <ImageBrush ImageSource="fist_hand.png"/>
                 </Ellipse.Fill>
