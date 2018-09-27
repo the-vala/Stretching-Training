@@ -43,7 +43,7 @@ namespace Ejemplo_PlantillaSkeleton
         MediaPlayer tip1 = new MediaPlayer();
         MediaPlayer tip2 = new MediaPlayer();
         MediaPlayer tip3 = new MediaPlayer();
-
+        int iPixeles = 5;
 
         /* ------------------------------------------------------------------------- */
 
@@ -67,6 +67,7 @@ namespace Ejemplo_PlantillaSkeleton
             progressTimer.IsEnabled = false;
 
             fondo.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\music.wav"));
+            fondo.Volume = 0.08;
             fondo.Play();
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
@@ -328,7 +329,6 @@ namespace Ejemplo_PlantillaSkeleton
                     break;
                 case 1:
                     tip1.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\audio1.wav"));
-                    fondo.Volume = 0.08;
                     tip1.Play();
                     CirculoStart.Visibility = Visibility.Hidden;
                     Start.Visibility = Visibility.Hidden;
@@ -338,6 +338,10 @@ namespace Ejemplo_PlantillaSkeleton
                     CirculoOutLH.Visibility = Visibility.Visible;
                     GoalLH.Visibility = Visibility.Visible;
                     GoalRH.Visibility = Visibility.Visible;
+                    GoalLH.SetValue(Canvas.TopProperty, 336.0);
+                    GoalLH.SetValue(Canvas.LeftProperty, 197.0);
+                    GoalRH.SetValue(Canvas.TopProperty, 338.0);
+                    GoalRH.SetValue(Canvas.LeftProperty, 421.0);
                     break;
                 case 2:
                     tip2.Open(new Uri(@"C:\Users\Rodolfo Ramírez\Documents\Stretching-Training\Ejemplo_PlantillaSkeleton\assets\audio2.wav"));
