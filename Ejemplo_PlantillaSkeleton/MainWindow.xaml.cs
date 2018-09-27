@@ -35,8 +35,8 @@ namespace Ejemplo_PlantillaSkeleton
         DispatcherTimer goalHTimer;
         //Timer barra de progreso
         DispatcherTimer progressTimer;
-        int iCont = 8;
-        int Ejercicio = 1;
+        int iCont = 1;
+        int Ejercicio = 0;
         private WriteableBitmap imagen; //Se utiliza para generar la imagen a partir del arreglo de bytes recibidos
         private byte[] cantidadPixeles; //Arreglo para recibir los bytes que envía el Kinect
         /* ------------------------------------------------------------------------- */
@@ -102,6 +102,14 @@ namespace Ejemplo_PlantillaSkeleton
                 pointerHead.SetValue(Canvas.LeftProperty, joint_X);
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
+                if(ChecarDistancia3(pointerHead, CirculoHead))
+                {
+                    CirculoHead.Fill = Brushes.Green;
+                }
+                else
+                {
+                    CirculoHead.Fill = Brushes.Red;
+                }
             }
             //	Si	rHand está	listo	obtener	las	coordenadas
             if (rHand.TrackingState == JointTrackingState.Tracked)
@@ -117,6 +125,19 @@ namespace Ejemplo_PlantillaSkeleton
                 LID.Content = skeleton.TrackingId;
                 switch(Ejercicio)
                 {
+                    case 0:
+                    case 4:
+                        if (ChecarDistancia3(pointerRHand, CirculoStart))
+                        {
+                            progressTimer.IsEnabled = true;
+                            CirculoStart.Fill = Brushes.Green;
+                        }
+                        else
+                        {
+                            progressTimer.IsEnabled = false;
+                            CirculoStart.Fill = Brushes.Red;
+                        }
+                        break;
                     case 1:
                         if (checarDistancia(pointerRHand, CirculoInRH))
                             CirculoOutRH.Fill = Brushes.Red; //No	se	encuentra
@@ -199,19 +220,6 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-            //	Si	cShoulder está	listo	obtener	las	coordenadas
-            if (cShoulder.TrackingState == JointTrackingState.Tracked)
-            {
-                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
-                joint_Point = this.SkeletonPointToScreen(cShoulder.Position);
-                joint_X = joint_Point.X;
-                joint_Y = joint_Point.Y;
-                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
-                pointerCShoulder.SetValue(Canvas.TopProperty, joint_Y);
-                pointerCShoulder.SetValue(Canvas.LeftProperty, joint_X);
-                //	Obtiene	el	Id	de	la	persona	mapeada
-                LID.Content = skeleton.TrackingId;
-            }
             //	Si	rElbow está	listo	obtener	las	coordenadas
             if (rElbow.TrackingState == JointTrackingState.Tracked)
             {
@@ -238,19 +246,6 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-            //	Si	spine está	listo	obtener	las	coordenadas
-            if (spine.TrackingState == JointTrackingState.Tracked)
-            {
-                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
-                joint_Point = this.SkeletonPointToScreen(spine.Position);
-                joint_X = joint_Point.X;
-                joint_Y = joint_Point.Y;
-                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
-                pointerSpine.SetValue(Canvas.TopProperty, joint_Y);
-                pointerSpine.SetValue(Canvas.LeftProperty, joint_X);
-                //	Obtiene	el	Id	de	la	persona	mapeada
-                LID.Content = skeleton.TrackingId;
-            }
             switch(Ejercicio)
             {
                 case 1:
@@ -261,6 +256,12 @@ namespace Ejemplo_PlantillaSkeleton
                     break;
                 case 2:
                     if (ChecarDistancia2(pointerLHand,VerticalL,HorizontalL) && ChecarDistancia2(pointerRHand, VerticalR, HorizontalR))
+                        progressTimer.IsEnabled = true;
+                    else
+                        progressTimer.IsEnabled = false;
+                    break;
+                case 3:
+                    if (ChecarDistancia3(pointerHead, CirculoHead))
                         progressTimer.IsEnabled = true;
                     else
                         progressTimer.IsEnabled = false;
@@ -276,19 +277,23 @@ namespace Ejemplo_PlantillaSkeleton
         {
             if (iCont == 0)
             {
-                Ejercicio++;
-                if(Ejercicio == 3)
-                {
-                    progressTimer.IsEnabled = false;
-                    return;
-                }
+                if (Ejercicio == 4)
+                    Ejercicio = 1;
+                else
+                    Ejercicio++;
                 ChangeExcersise();
-                ejercicio.Content = "Ejercicio# " + Ejercicio;
-                iCont = 8;
+                ejercicio.Content = "Estiramiento# " + Ejercicio;
+                if (Ejercicio == 4)
+                    iCont = 1;
+                else
+                    iCont = 8;
                 progressbar.Value = 0;
                 return;
             }
-            progressbar.Maximum = 8;
+            if(Ejercicio == 0 || Ejercicio == 4)
+                progressbar.Maximum = 1;
+            else
+                progressbar.Maximum = 8;
             progressbar.Value++;
             iCont--;
             tiempo.Content = "Tiempo: " + iCont;
@@ -309,7 +314,12 @@ namespace Ejemplo_PlantillaSkeleton
         {
             switch (Ejercicio)
             {
+                case 0:
+                    Start.Text = "Comenzar Estiramientos";
+                    break;
                 case 1:
+                    CirculoStart.Visibility = Visibility.Hidden;
+                    Start.Visibility = Visibility.Hidden;
                     CirculoInRH.Visibility = Visibility.Visible;
                     CirculoInLH.Visibility = Visibility.Visible;
                     CirculoOutRH.Visibility = Visibility.Visible;
@@ -324,6 +334,8 @@ namespace Ejemplo_PlantillaSkeleton
                     HorizontalL.Visibility = Visibility.Visible;
                     VerticalR.Visibility = Visibility.Visible;
                     HorizontalR.Visibility = Visibility.Visible;
+                    GoalRH.RenderTransform = new RotateTransform(0);
+                    GoalLH.RenderTransform = new RotateTransform(0);
                     GoalLH.SetValue(Canvas.TopProperty, 336.0);
                     GoalLH.SetValue(Canvas.LeftProperty, 210.0);
                     GoalRH.SetValue(Canvas.TopProperty, 336.0);
@@ -334,13 +346,25 @@ namespace Ejemplo_PlantillaSkeleton
                     HorizontalL.Visibility = Visibility.Hidden;
                     VerticalR.Visibility = Visibility.Hidden;
                     HorizontalR.Visibility = Visibility.Hidden;
-                break;
+                    GoalLH.Visibility = Visibility.Hidden;
+                    GoalRH.Visibility = Visibility.Hidden;
+                    GoalHead.Visibility = Visibility.Visible;
+                    CirculoHead.Visibility = Visibility.Visible;
+                    break;
+                case 4:
+                    GoalHead.Visibility = Visibility.Hidden;
+                    CirculoHead.Visibility = Visibility.Hidden;
+                    CirculoStart.Visibility = Visibility.Visible;
+                    Start.Visibility = Visibility.Visible;
+                    Start.Text = "Volver a empezar";
+                    break;
             }
         }
 
         double anguloRH = 360;
         double anguloLH = 0;
         int alturaL = 0;
+        double anguloHead = 360;
         private void MoveHandGoal(object sender, EventArgs e)
         {
             switch(Ejercicio)
@@ -361,8 +385,10 @@ namespace Ejemplo_PlantillaSkeleton
                     {
                         GoalLH.SetValue(Canvas.LeftProperty, 210.0 + alturaL);
                     }
-                    
-
+                    break;
+                case 3:
+                    anguloHead -= 10;
+                    GoalHead.RenderTransform = new RotateTransform(anguloHead);
                     break;
             }
             
@@ -496,6 +522,18 @@ namespace Ejemplo_PlantillaSkeleton
         private bool ChecarDistancia2(Ellipse Puntero, Rectangle Ver, Rectangle Hor)
         {
             return (Collision(Puntero, Ver) || Collision(Puntero, Hor));
+        }
+
+        
+        private bool ChecarDistancia3(Ellipse Puntero, Ellipse Circulo)
+        {
+            dXC = (double)Circulo.GetValue(Canvas.LeftProperty) + (Circulo.Width / 2);
+            dYC = (double)Circulo.GetValue(Canvas.TopProperty) + (Circulo.Height / 2);
+
+            double dX1 = (double)Puntero.GetValue(Canvas.LeftProperty) + (Puntero.Width / 2);
+            double dY1 = (double)Puntero.GetValue(Canvas.TopProperty) + (Puntero.Height / 2);
+            double dDistancia = Math.Sqrt(Math.Pow(dXC - dX1, 2) + Math.Pow(dYC - dY1, 2));
+            return (dDistancia < Circulo.Width / 2);
         }
 
         private bool Collision(Ellipse Puntero, Rectangle Rec)
