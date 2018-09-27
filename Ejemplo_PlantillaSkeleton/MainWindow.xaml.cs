@@ -62,6 +62,8 @@ namespace Ejemplo_PlantillaSkeleton
 
             // Realizar configuraciones e iniciar el Kinect
             Kinect_Config();
+            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"../../assets/music.wav");
+            sp.Play();
         }
         /* -- Área para el método que utiliza los datos proporcionados por Kinect -- */
         /// <summary>
@@ -171,19 +173,7 @@ namespace Ejemplo_PlantillaSkeleton
                 //	Obtiene	el	Id	de	la	persona	mapeada
                 LID.Content = skeleton.TrackingId;
             }
-            //	Si	cShoulder está	listo	obtener	las	coordenadas
-            if (cShoulder.TrackingState == JointTrackingState.Tracked)
-            {
-                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
-                joint_Point = this.SkeletonPointToScreen(cShoulder.Position);
-                joint_X = joint_Point.X;
-                joint_Y = joint_Point.Y;
-                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
-                pointerCShoulder.SetValue(Canvas.TopProperty, joint_Y);
-                pointerCShoulder.SetValue(Canvas.LeftProperty, joint_X);
-                //	Obtiene	el	Id	de	la	persona	mapeada
-                LID.Content = skeleton.TrackingId;
-            }
+           
             //	Si	rElbow está	listo	obtener	las	coordenadas
             if (rElbow.TrackingState == JointTrackingState.Tracked)
             {
@@ -211,18 +201,6 @@ namespace Ejemplo_PlantillaSkeleton
                 LID.Content = skeleton.TrackingId;
             }
             //	Si	spine está	listo	obtener	las	coordenadas
-            if (spine.TrackingState == JointTrackingState.Tracked)
-            {
-                //	Obtiene	las	coordenadas	(x,	y)	del	Joint
-                joint_Point = this.SkeletonPointToScreen(spine.Position);
-                joint_X = joint_Point.X;
-                joint_Y = joint_Point.Y;
-                //Emplea	las	coordenadas	del	Joint	para	mover	la	elipse	
-                pointerSpine.SetValue(Canvas.TopProperty, joint_Y);
-                pointerSpine.SetValue(Canvas.LeftProperty, joint_X);
-                //	Obtiene	el	Id	de	la	persona	mapeada
-                LID.Content = skeleton.TrackingId;
-            }
             if (checarDistancia(pointerRHand, CirculoInRH) && checarDistancia(pointerLHand, CirculoInLH))
                 progressTimer.IsEnabled = false;
             else

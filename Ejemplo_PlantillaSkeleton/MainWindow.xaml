@@ -11,13 +11,13 @@
         <Canvas	Name="MainCanvas" Width="640" Height="480"  HorizontalAlignment="Center" Margin="61,112">
             <Ellipse x:Name="CirculoOutRH" Width="150" Height="150"	Canvas.Left="360" Canvas.Top="216" Fill="Red" Visibility="Hidden" Opacity="0.5"/>
             <Ellipse x:Name="CirculoInRH" Width="50" Height="50"	Canvas.Left="412" Canvas.Top="267" Fill="Azure" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="VerticalR" Fill="Red" Height="192" Canvas.Left="379" Canvas.Top="174" Width="60" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="HorizontalR" Fill="Red" Height="60" Canvas.Left="379" Canvas.Top="116" Width="200" Visibility="Hidden" Opacity="0.5"/>
+            <Rectangle x:Name="VerticalR" Fill="Red" Height="192" Canvas.Left="379" Canvas.Top="174" Width="60" Opacity="0.5" Visibility="Hidden"/>
+            <Rectangle x:Name="HorizontalR" Fill="Red" Height="60" Canvas.Left="379" Canvas.Top="116" Width="200" Opacity="0.5" Visibility="Hidden"/>
 
             <Ellipse x:Name="CirculoOutLH" Width="150" Height="150"	Canvas.Left="137" Canvas.Top="216" Fill="Red" Visibility="Hidden" Opacity="0.5"/>
-            <Ellipse x:Name="CirculoInLH" Width="50" Height="50" Canvas.Left="186" Canvas.Top="267" Fill="Azure" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="VerticalL" Fill="Red" Height="192" Canvas.Left="210" Canvas.Top="174" Width="60" Visibility="Hidden" Opacity="0.5"/>
-            <Rectangle x:Name="HorizontalL" Fill="Red" Height="60" Canvas.Left="70" Canvas.Top="114" Width="200" Visibility="Hidden" Opacity="0.5"/>
+            <Ellipse x:Name="CirculoInLH" Width="50" Height="50" Canvas.Left="186" Canvas.Top="267" Fill="Azure" Opacity="0.5" Visibility="Hidden"/>
+            <Rectangle x:Name="VerticalL" Fill="Red" Height="192" Canvas.Left="210" Canvas.Top="174" Width="60" Opacity="0.5" Visibility="Hidden"/>
+            <Rectangle x:Name="HorizontalL" Fill="Red" Height="60" Canvas.Left="70" Canvas.Top="114" Width="200" Opacity="0.5" Visibility="Hidden"/>
             <Ellipse x:Name="pointerHead" Width="30" Height="30" Canvas.Left="300" Canvas.Top="10"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerRHand" Width="30" Height="30" Canvas.Left="508" Canvas.Top="392"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerLHand" Width="30" Height="30" Canvas.Left="97" Canvas.Top="392"	Fill="#FFFF00E5"/>
@@ -25,8 +25,6 @@
             <Ellipse x:Name="pointerLElbow" Width="30" Height="30" Canvas.Left="97" Canvas.Top="245"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerRShoulder" Width="30" Height="30" Canvas.Left="440" Canvas.Top="90"	Fill="#FFFF00E5"/>
             <Ellipse x:Name="pointerLShoulder" Width="30" Height="30" Canvas.Left="170" Canvas.Top="90"	Fill="#FFFF00E5"/>
-            <Ellipse x:Name="pointerCShoulder" Width="30" Height="30" Canvas.Left="300" Canvas.Top="60"	Fill="#FFFF00E5"/>
-            <Ellipse x:Name="pointerSpine" Width="30" Height="30" Canvas.Left="300" Canvas.Top="395"	Fill="#FFFF00E5"/>
             <Label x:Name="tiempo" Content="Tiempo: 8" Canvas.Left="473" Canvas.Top="422" Width="97" FontWeight="Bold" FontSize="15"/>
             <Label x:Name="ejercicio" Content="Ejercicio# 1" Canvas.Left="10" Canvas.Top="10" Width="97" FontWeight="Bold" FontSize="15"/>
             <Image x:Name="GoalLH" Height="30" Canvas.Left="197" Canvas.Top="336" Source="fist_hand.png"  Width="30" RenderTransformOrigin="0.5,-1.55"/>
