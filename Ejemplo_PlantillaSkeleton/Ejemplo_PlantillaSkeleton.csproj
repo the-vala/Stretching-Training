@@ -100,6 +100,9 @@
     <Resource Include="fist_hand.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\audio1.wav" />
+    <Content Include="assets\audio2.wav" />
+    <Content Include="assets\audio3.wav" />
     <Content Include="assets\music.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
